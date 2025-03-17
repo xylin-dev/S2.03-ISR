@@ -1,0 +1,85 @@
+L'automatisation de l'installation d'un système d'exploitation comme Debian simplifie et optimise le déploiement, tout en réduisant les risques d'erreurs humaines. De plus, cela permet de se détendre et de jouer à Minecraft pendant que l'installation se fait, sans avoir à intervenir.
+
+Cette section présente les étapes et les choix techniques qui ont permis de mettre en place un processus d'installation automatisée pour Debian sur Windows. 
+
+Pour des raisons qui me sont encore sombre, l'application VirtualBox de ma session dans les salles de TP refuse obstinément de s'ouvrir.
+
+*Tristesse et désespoir.*
+
+Après avoir créé la machine virtuelle sur VirtualBox dans un répertoire facilement accessible et où OneDrive ne viendrait pas me ralentir, c'est-à-dire dans le dossier *"Downloads"*, j'ai téléchargé l'archive `autoinstall_Debian.zip` depuis Moodle et l'ai décompressée dans le répertoire de ma machine virtuelle : `< .\Downloads\SAE-203\Debian-SAE203 >`.
+
+Comme demandé, je suis allé dans WSL et j'ai utilisé la commande suivante :
+
+[source, bash]
+----
+cd /mnt/c/Users/ridhi/Downloads/SAE-203/Debian-SAE203/autoinstall_iut_salles_TP && sed -i -E "s/(--iprt-iso-maker-file-marker-bourne-sh).*$/\1=$(cat /proc/sys/kernel/random/uuid)/" S203-Debian12.viso
+----
+
+Cela m'a permis de me déplacer dans le répertoire où se trouvait le fichier *S203-Debian12.viso* et de remplacer la chaîne "@@UUID@@" par un identifiant unique universel. 
+
+J'ai ensuite vérifié que tout était OK en ouvrant le fichier et, effectivement, le "@@UUID@@" avait bien été remplacé par une série de lettres et de chiffres.
+
+J'ai ensuite inséré le fichier *S203_Debian12.viso* dans le lecteur optique de ma machine virtuelle et lancé celle-ci. Et là, c'est le drame : *LES PROBLÈMES COMMENCENT !*
+
+VirtualBox m'affiche une erreur comme quoi il ne trouve pas le fichier *debian[...].iso* :
+
+[[Figure_1]]
+image::./img/error-debian-iso.png[align=center]
+
+Heureusement, j'avais pris soin de vérifier le fichier *S203-Debian12.viso*, où j'avais remarqué le chemin indiqué dans l'link:#Figure_1[erreur ci-dessus], mais auquel je n'avais pas prêté attention:
+
+image::./img/probleme-1.png[align=center]
+
+J'ai donc téléchargé le fichier *debian[...].iso* depuis leur https://www.debian.org/[site officiel] et je l'ai placé dans le répertoire `< .\Downloads\SAE-203\Debian-SAE203\autoinstall_iut_salles_TP\ressources >`. 
+
+J'ai ensuite modifié le fichier *S203-Debian12.viso* pour y insérer un chemin absolu vers ce fichier *debian[...].iso* en écrivant :
+====
+C:\Users\ridhi\Downloads\SAE-203\Debian-SAE203\autoinstall_iut_salles_TP\S203-Debian12.viso
+====
+Et ça n'a pas marché. 
+
+Du coup, j'ai changé de stratégie, passé en mode Linux _(en écrivant "mon/chemin" au lieu de "mon\chemin")_ et utilisé un chemin relatif, comme le montre l'image ci-dessous.
+
+image::./img/solution-1.png[align=center]
+
+J'ai redémarré la machine, mais une nouvelle erreur est apparue, différente de la précédente.
+
+[[Figure_2]]
+image::./img/error-vbga.png[align=center]
+
+Je suis donc allé chercher sur Internet le fichier *VBoxGuestAdditions.iso*. Je l'ai trouvé sur le site suivant : https://archive.org/details/VirtualBoxGA-Collection[VirtualBox Guest Additions Collection : Oracle : Free Download, Borrow, and Streaming : Internet Archive]. 
+
+image::./img/archive.org.png[align=center]
+
+J'y ai téléchargé la dernière version, modifié son nom et l'ai placé dans le répertoire où se trouvait le fichier *debian[...].iso*, c'est-à-dire dans `< .\Downloads\SAE-203\Debian-SAE203\autoinstall_iut_salles_TP\ressources >``. 
+
+Ensuite, j'ai encore modifié le fichier *S203-Debian12.viso*:
+
+.Fichier S203-Debian12.viso avant
+image::./img/probleme-2.png[align=center]
+
+.Fichier S203-Debian12.viso après
+image::./img/solution-2.png[align=center]
+
+Enfin, tout semblait fonctionner, et la machine a commencé son installation… jusqu'à ce qu'une nouvelle erreur apparaisse.
+
+[[Figure_5]]
+image::./img/erreur-proxy.png[align=center]
+
+Je me suis souvenu de ce que M. Carle avait mentionné dans son PDF, affiché sur mon autre écran, concernant le fichier *preseed.cfg* :
+
+[quote, Mr. Carle, sae203-1.pdf]
+"Pour un usage autre (chez vous ou avec une autre version de Debian), il faudra adapter ce fichier de pré-configuration (par exemple, commenter la ligne définissant le proxy)".
+
+J'ai donc commenté la section concernant le proxy:
+
+image::./img/proxy.png[align=center]
+
+[NOTE]
+====
+En recréant la VM pour prendre des captures d'écran pour ce rapport, j'ai remarqué que le Wi-Fi que j'utilisais jouait un rôle par rapport au proxy. 
+
+En clair : quand je suis connecté à *eduroam*, tout fonctionne, mais dès que je suis sur le Wi-Fi de ma résidence, ça plante (ce n'est pas comme si c'était écrit en gros sur l'image concernant l'link:#Figure_5[erreur de proxy], mais bon…).
+====
+
+Enfin, tout est devenu fonctionnel et l'installation s'est parfaitement déroulée.

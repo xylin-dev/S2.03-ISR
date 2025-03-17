@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 = Rapport SAE 2.03 ISR
 :toc: left
 :icons: font
@@ -516,3 +517,92 @@ Les logiciels bien connus dans ce domaine sont *GitHub* et *GitLab*.
 * *Comment faire pour mettre à jour le binaire de votre service sans devoir tout reconfigurer ? Essayez en mettant à jour vers la version 1.22-dev.* +
 
 === 4.2: Rapport sur nos actions réalisées durant cette semaine.
+=======
+= Rapport SAE 2.03 ISR
+:toc: left
+:icons: font
+:lang: fr
+:encoding: utf-8
+:doctype: article
+:figure-caption!:
+:pdf-fontsdir: font
+:pdf-themesdir: theme
+:toc-title: Table des matières
+
+[abstract]
+.Résumé
+
+Ce rapport documente les différentes étapes et apprentissages réalisés dans le cadre de la SAE 2.03 ISR. Il est structuré en plusieurs semaines de travail, chacune abordant un aspect spécifique de l'installation, de la configuration et de l'utilisation de divers outils informatiques.
+
+<<<
+
+== Semaine 1: Installation et Configuration de Debian.
+
+[NOTE]
+====
+Durant la première semaine de la SAE, l'installation de la machine virtuelle ainsi qu'une grande partie des tâches demandées ont été réalisées sous Windows. Nous avons procédé légèrement différemment, mais nous avons tout de même compris le concept.
+====
+
+=== 1.1: Réponses aux questions.
+include::src/semaine 1/questions.adoc[]
+
+=== 1.2: Rapport sur nos actions réalisées durant cette semaine.
+
+[NOTE]
+====
+Concernant le rapport de nos actions sur la *partie 2 à 4*, nous n’avons pas jugé pertinent de le détailler, car nous nous sommes simplement conformés aux exigences demandées.
+====
+
+include::src/semaine 1/rapport.adoc[]
+
+=== 1.3: Procédure pour l'Auto-Installation de Debian
+Cette section vous guidera dans l'installation automatique de Debian sur Windows, ainsi que sur Linux et d'autres systèmes _(où vous devez adapter la méthode)_.
+
+include::src/semaine 1/procedure.adoc[]
+
+<<<
+
+== Semaine 2: Apprentissage Balisage Léger - Base
+
+<<<
+
+== Semaine 3: Recherche et étude des applications clientes.
+=== 3.1: Réponses aux questions.
+
+include::src/semaine 3/questions.adoc[]
+
+=== 3.2: Rapport sur nos actions réalisées durant cette semaine.
+
+include::src/semaine 3/rapport.adoc[]
+
+<<<
+
+== Semaine 4: Gitea : Installation & Utilisation du Service
+=== 4.1: Réponses aux questions.
+
+include::src/semaine 4/questions.adoc[]
+
+=== 4.2: Rapport sur nos actions réalisées durant cette semaine.
+
+[NOTE]
+====
+Le rapport sera structuré en deux parties : 
+
+* *link:#installation_gitea[L'installation de Gitea]* où je décris le processus d'installation de Gitea, les erreurs rencontrées et les solutions que j'ai appliquées pour les corriger.
+
+* *link:#utilisation_gitea[L'utilisation de Gitea]* où j'explique mon utilisation de Gitea.
+====
+
+include::src/semaine 4/rapport-installation.adoc[]
+
+include::src/semaine 4/rapport-utilisation.adoc[]
+
+=== 4.3: Procédure pour l'installation de Gitea
+
+[NOTE]
+====
+Cette section vous guidera à travers les étapes nécessaires pour installer *Gitea version 1.23.5* et le configurer en tant que service sur une machine Linux.
+====
+
+include::src/semaine 4/procedure.adoc[]
+>>>>>>> 4ac2910 (rapport-final)

@@ -1,0 +1,106 @@
+[[utilisation_gitea]]
+==== *Utilisation de Gitea*
+
+* *Introduction: accéder à mon Localhost depuis mon Téléphone*
+
+====
+Avant d’inviter mon équipe à me rejoindre sur Gitea pour partager nos codes sources et ressources, je me suis d’abord demandé s’il était possible d’accéder à mon *localhost* depuis mon téléphone.
+
+La raison de ce questionnement était liée à : 
+
+[quote, Mr. Carle, sae203-4]
+"Vos codes sources de TP et projets dans les ressources de développement à partager entre tous (Les membres de votre équipe de SAÉ ou plus)."
+
+C’est là que le mode d’accès réseau NAT a attiré mon attention, notamment avec cette remarque :
+
+[quote, Mr. Carle, sae203-4]
+"N’oubliez pas non plus de vérifier que vous avez correctement configuré la redirection de port (ce qui pourrait expliquer certains de vos soucis d’utilisation)."
+
+N’ayant pas la motivation de lire en détail le https://www.virtualbox.org/manual/UserManual.html#networkingdetails[manuel] de VirtualBox sur le réseau, j’ai préféré regarder des vidéos YouTube. 
+
+Une en particulier m’a bien aidé: *https://www.youtube.com/watch?v=iPPKNc3appk&t=22s[Le réseau avec VirtualBox : NAT, Bridge, Host-Only, réseau interne, etc.]*, réalisé par IT-Connect.
+
+Grâce à cette vidéo, j’ai mieux compris le fonctionnement du mode d’accès réseau ainsi que du link:#tab[tableau de synthèse] permettant de comprendre les différentes caractéristiques de ces modes d’accès réseau et une aperçu de comment résoudre mon problème initial : *accéder à la page de Gitea depuis mon téléphone*.
+
+[[tab]]
+image::./img/tab.png[align=center]
+
+* *Première tentative*
+
+Je suis allé sur ma machine virtuelle et j’ai lancé Gitea en arrière-plan avec : `./gitea web &`
+
+image::./img/gitea-on.png[align=center]
+
+Puis, j’ai utilisé : `ip a` pour lister les interfaces réseau et récupérer l’IP de *enp0s3*.
+
+image::./img/ip-a.png[align=center]
+
+J’ai testé sur Firefox avec *http://10.0.2.15:3000*, et ça fonctionnait bien sur ma VM.
+
+image::./img/gitea-firefox.png[align=center]
+
+Mais en essayant sur le navigateur de mon téléphone, ça ne marchait pas.
+
+[[no-found]]
+image::./img/error-gitea.jpg[align=center]
+
+Pour vérifier si le problème venait de moi, j’ai ouvert le *cmd* sur ma machine hôte et tenté un `ping` :
+
+[source, bash]
+----
+ping 10.0.2.15
+----
+
+Résultat : ça ne répondait pas... J’ai compris que ce n’était pas *la bonne IP à utiliser*.
+
+image::./img/ping-null.png[align=center]
+
+* *Deuxième tentative*
+
+J’ai laissé tomber la VM pour me concentrer sur ma machine hôte.
+
+Toujours dans le *cmd*, j’ai utilisé : `ipconfig` pour voir mon adresse IP, et j’ai donc noté *192.168.56.1*.
+
+image::./img/ip-not-good.png[align=center]
+
+J’ai tenté d’accéder à http://192.168.56.1:3000 depuis mon navigateur PC → ça a marché.
+
+image::./img/edge.png[align=center]
+
+Mais sur mon téléphone, même écran d’erreur qu’avec le link:#no-found[précédent]...
+
+* *Révélation*
+
+J’ai bloqué un moment en me demandant ce que j’avais fait de travers. 
+
+Puis, *illumination*!
+
+J’aurais dû me rappeler des cours de réseau et faire la distinction entre IP publique et privée.
+
+Je suis retourné sur cmd pour trouver mon adresse publique.
+
+image::./img/true-ip.png[align=center]
+
+J’ai tenté de la pinger : ça a marché.
+
+image::./img/ping-good.png[align=center]
+
+J’ai essayé http://10.245.83.52:3000 dans le navigateur de mon téléphone → ça ne marchait toujours pas.
+
+Mais cette fois-ci, j’ai tout de suite compris le problème : le Wi-Fi.
+
+Mon PC était connecté à *eduroam*, tandis que mon téléphone était sur le Wi-Fi de ma résidence.
+
+Je me suis connecté à *eduroam* sur mon téléphone, retenté l’accès, et bingo, ça marchait!
+
+image::./img/lets-go.jpg[align=center]
+
+* *Conclusion*
+
+Grâce à ça, j’ai compris l’utilité des cours et comment faire ce qui nous était demandé :
+
+image::./img/consigne.png[align=center]
+
+J’ai par la suite demandé à mon équipe de se connecter au Wi-Fi *eduroam* pour accéder à Gitea via mon adresse ip.
+====
+

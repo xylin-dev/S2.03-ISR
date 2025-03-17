@@ -1,0 +1,23 @@
+==== *Partie 2.0: Installation de Gitea*
+* *Qu’est-ce que Gitea ?* +
+Gitea est une solution logicielle autohébergée et complète pour le développement logiciel. Elle offre l'hébergement Git, la gestion des revues de code, la collaboration en équipe, un registre de packages ainsi que des fonctionnalités d'intégration et de déploiement continus. Légère et facile à utiliser, Gitea constitue une alternative à GitHub, Bitbucket et GitLab.footnote:[https://docs.gitea.com/next/[What is Gitea?]]
+
+* *À quels logiciels bien connus dans ce domaine peut-on le comparer ?* +
+Comme mentionné précédemment, Gitea est une alternative à GitHub, Bitbucket et GitLab, *GitHub et Gitlab* étant les plus connus.
+
+==== *Partie 2.1.2: Mise à jour du binaire du service Gitea*
+* *Quelle version du binaire avez-vous installé ? Donnez la version et la commande permettant d’obtenir cette information.* +
+En étant dans le répertoire contenant le fichier binaire de Gitea, j'exécute la commande : `./gitea -v`. La commande exécutée retourne le message suivant : _"Gitea version 1.23.5 built with GNU Make 4.3, go1.23.7 : bindata, sqlite, sqlite_unlock_notify"_. + 
+*Conclusion, la version du binaire est la 1.23.5* footnote:[https://docs.gitea.com/next/administration/ommand-line#global-options[Global Options - Gitea Command Line]].
+
+* *Comment faire pour mettre à jour le binaire de votre service sans devoir tout reconfigurer ? Essayez en mettant à jour vers la version 1.22-dev.* +
+Au moment de rédiger ce rapport, je n'ai pas trouvé la version *1.22-dev* en effectuant une recherche avec Ctrl+F sur https://dl.gitea.com/gitea/[le site de téléchargement de Gitea]. +
+En cherchant des versions "dev", je n'ai trouvé que les versions _1.7.0-dev, 1.6.0-dev et 1.5.0-dev_. Par conséquent, je vais me permettre de faire l'installation et la mise à jour avec la version *1.22.0*.
+** Pour ce faire, je me réfère à la section https://docs.gitea.com/next/installation/upgrade-from-gitea#upgrade-from-binary[Upgrade from binary] de la documentation officielle de Gitea. +
+. Je télécharge l'ancienne version de Gitea _(1.22.0)_ en exécutant la commande suivante : `wget -O gitea-1.22.0 https://dl.gitea.com/gitea/1.22.0/gitea-1.22.0-linux-amd64`. Cette commande est lancée dans le répertoire */var/lib/gitea*, où se trouve actuellement le fichier binaire de la version 1.23.5 et en étant sur l'utilisateur *git*.
+. J'arrête le processus actuel de Gitea _(car j'ai utilisé la commande `./gitea web &` pour lancer Gitea en arrière-plan)_ en utilisant la commande suivante pour récupérer son PID : `ps aux | grep gitea` _(cette commande permet de lister les processus en cours et de trouver celui lié à Gitea)_. Ensuite, pour arrêter ce processus, j'utilise la commande kill -9 suivie du PID correspondant (dans mon cas, le PID est 4201) : `kill -9 4201` _(cela termine le processus de Gitea avant de procéder à l'installation de la nouvelle version)._ Pour plus de détails sur la commande `ps aux`, je me suis référé au site de https://www.malekal.com/commande-ps-lister-les-processus-linux/[Malekal].
+. Enfin, j'exécute la commande suivante pour lancer Gitea avec la version 1.22.0 : `./gitea-1.22.0 web`. + 
+Cependant, cette tentative échoue, car il y a un problème de compatibilité avec la base de données. Le message d'erreur suivant apparaît : *[red]#Migration Error: Your database (migration version: 312) is for a newer Gitea, you can not use the newer database for this old Gitea release (299)#*. 
++
+Cela indique que la version de la base de données est plus récente que la version de Gitea que j'essaie d'utiliser. Pour résoudre ce problème, je dois soit de [green]#mettre à jour Gitea vers une version plus récente qui correspond à la version actuelle de la base de données#, soit de [green]#revenir à une version de Gitea compatible avec la version de la base de données actuelle#.
+. Du coup, je décide de retenter l'opération avec la *version 1.24.3 amd64* de Gitea en utilisant les mêmes procédés, et cette fois-ci, cela fonctionne.

@@ -1,0 +1,201 @@
+==== *Configuration Globale de Git*
+J’ai commencé par ouvrir ma machine virtuelle et utiliser le raccourci clavier *Ctrl+Alt+T* pour ouvrir le Terminal.
+
+J’ai ensuite suivi les étapes demandées en définissant le nom d’utilisateur global pour Git :
+
+[source, bash]
+----
+git config --global user.name "El-Khair Nourdine"
+----
+
+Puis, j’ai défini l’adresse e-mail globale associée aux commits :
+
+[source, bash]
+----
+git config --global user.email "el-khair.nourdine.etu@univ-lille.fr"
+----
+
+Enfin, j’ai défini le nom de la branche par défaut lors de l’initialisation d’un nouveau dépôt :
+
+[source, bash]
+----
+git config --global init.defaultBranch "master"
+----
+
+==== *Les Interfaces Graphiques pour Git: Initialisation*
+J’ai commencé à mettre à jour la liste des paquets disponibles en exécutant la commande :
+
+[source, bash]
+----
+sudo apt update && sudo apt upgrade
+----
+
+Ensuite, j’ai installé les paquets `gitk` et `git-gui` :
+
+[source, bash]
+----
+sudo apt install gitk && sudo apt install git-gui
+----
+
+Avant de les utiliser, j’ai pris le temps de me renseigner sur leur fonctionnement en consultant les sites suivantes :
+
+* https://codeur-pro.fr/git-gui-guide-complet/[Guide Git Gui]
+* https://codeur-pro.fr/gerer-son-historique-visuellement-avec-gitk/[Guide Gitk]
+
+Après avoir compris leur fonctionnement, j’ai transféré l’archive de ce rapport sur le bureau de ma machine virtuelle. J’ai ensuite créé un répertoire sur mon bureau pour y placer mon rapport et commencer à manipuler `gitk` et `git-gui` :
+
+[source, bash]
+----
+mkdir ~/Bureau/git-test && cd ~/Bureau/git-test && mv ../rapport .
+----
+
+==== *Les Interfaces Graphiques pour Git: Git Gui*
+
+J’ai voulu tester *gitk* en exécutant la commande `gitk &` dans le répertoire _git-test_, mais j’ai rencontré un link:#erreur.gitk[message d’erreur] indiquant que Git ne parvenait pas à interpréter correctement l’argument *HEAD*. 
+
+[[erreur.gitk]]
+image::./img/erreur-gitk.png[align=center]
+
+Ce problème venait du fait que je n’avais pas encore initialisé de dépôt Git. J’ai donc commencé par utiliser *git-gui*, en exécutant la commande `git gui &` pour initialiser un dépôt Git avant tester *gitk*.
+
+À l’ouverture, l’interface de Git Gui se présente ainsi : 
+
+image::./img/git-gui.png[align=center]
+
+J’ai ensuite créé un nouveau dépôt, ce qui équivaut à la commande `git init`. 
+
+Puis, j’ai cliqué sur *Naviguer* et étant donné que j’avais exécuté la commande `git gui &` dans le répertoire contenant mon rapport, je n’ai pas eu à faire beaucoup de manipulations. J’ai simplement cliqué sur OK : 
+
+image::./img/gg-navigation.png[align=center]
+
+Pour faire un premier essai, j’ai indexé le fichier _rapport.adoc_ en cliquant sur l’icône à gauche de son nom. Dans le champ *Message de commit initial*, j’ai saisi : "rapport initial".
+
+J’ai ensuite cliqué sur *Signer*, puis sur *Committer*, ce qui équivaut à la commande : `git commit -m "rapport initial"`
+
+image::./img/index-rapport.png[align=center]
+
+J’ai ensuite modifié le fichier _rapport.adoc_ en exécutant la commande suivante dans le terminal :
+
+[source, bash]
+----
+pluma rapport-intermediaire/rapport.adoc
+----
+
+J’ai supprimé une partie du contenu, puis enregistré le fichier.
+
+En revenant dans Git Gui, j’ai cliqué sur *Recharger modifs* pour voir apparaître le _rapport.adoc_ qui n’était plus visible à cause du commit précédent. 
+
+Ensuite, j’ai cliqué sur l’icône à gauche de son nom pour l’indexer, visualiser les modifications et les committer:
+
+image::./img/rapport-modif.png[align=center]
+
+J’ai ensuite remis _rapport.adoc_ à son état initial, puis cliqué sur *Recharger modifs* avant de cliquer sur *Indexer modifs* pour ajouter toutes les fichiers à l’index. Enfin, j’ai validé en commitant : 
+
+image::./img/index-all.png[align=center]
+
+Maintenant, je vais voir ce que donne *Gitk*.
+
+==== *Les Interfaces Graphiques pour Git: Gitk*
+J’ai exécuté la commande `gitk &` pour ouvrir Gitk en arrière-plan dans le répertoire de mon rapport.
+
+image::./img/gitk.png[align=center]
+
+Ensuite, j’ai pu visualiser l’ensemble des commits présents dans mon dépôt en lisant les messages des commits, l’auteur, ainsi que la date de création de chaque commit.
+
+J’ai ensuite exploré l’historique en comparant les différences entre les commits, en observant l'ancienne version et la nouvelle version des fichiers. 
+
+==== *Installons Autre Chose: Git Cola*
+J'ai commencé par installer *Git Cola* via la commande suivante :
+
+[source,bash]
+----
+sudo apt install git-cola
+----
+
+Une fois l'installation terminée, j'ai exécuté la commande suivante pour ouvrir l'interface graphique de _Git Cola_ : `git cola`.
+
+image::./img/open-gitcola.png[align=center]
+
+Contrairement à *Git Gui*, j'ai décidé de cloner un dépôt existant plutôt que d'utiliser un fichier présent sur mon bureau.
+
+J'ai choisi le dépôt de la SAE 1.02 sur le logiciel ludo-pédagogique _VivreOuSurvivre_. 
+
+Pour cela, j’ai copié le lien *HTTPS* du dépôt sur https://github.com/xylin-dev/VivreOuSurvivre[GitHub], je l’ai collé dans le champ correspondant, puis j’ai spécifié l’emplacement où le dépôt serait enregistré sur ma machine, à savoir sur mon bureau: `~/Bureau`.
+
+image::./img/clone-gitcola.png[align=center]
+
+Après cela, l’interface de *Git Cola* s’est affichée.
+
+image::./img/interface-gitcola.png[align=center]
+
+J’ai commencé à explorer l’application et ses différentes options afin de comprendre son fonctionnement et d’identifier les fonctionnalités les plus pertinentes à mentionner dans ce rapport.
+
+Une fois familiarisé avec l'interface et après m’être documenté sur le logiciel sur leur site web https://git-cola.github.io/screenshots.html[Git Cola], j’ai commencé à manipuler plus sérieusement les fichiers de mon dépôt. 
+
+J’ai notamment modifié le fichier source principal du dépôt à l’aide de Pluma, en exécutant la commande suivante dans le répertoire _src_ où il se trouvait : `pluma VivreOuSurvivre.java`.
+
+J'ai simplement supprimé un commentaire que j'avais oublié d’enlever avant de rendre la SAE au premier semestre.
+
+image::./img/pluma-gitcola.png[align=center]
+
+Après la modification, le fichier est apparu dans l'interface de Git Cola sans que j’aie besoin de rafraîchir l’affichage. 
+
+image::./img/spawn-gitcola.png[align=center]
+
+J'ai ensuite double-cliqué dessus afin de le *pré-commiter* _(terme utilisé par Git Cola, qui correspond en réalité à l’indexation du fichier, équivalente à `git add`)_.
+
+Ensuite, j’ai procédé au commit en renseignant un message ainsi qu’un commentaire descriptif avant de valider.
+
+image::./img/commit-gitcola.png[align=center]
+
+J’ai ensuite voulu visualiser les différences apportées au fichier en me rendant dans le menu [underline]#Différence > Branches...#, qui est l’équivalent de la commande : `git diff`.
+
+J’y ai observé la seule modification mineure que j’avais effectuée.
+
+image::./img/comparaison-gitcola.png[align=center]
+
+J’ai poursuivi en affichant les différentes branches du dépôt en allant dans [underline]#Branche > Visualiser la branche courante...#.
+
+Cette action m’a redirigé vers Gitk.
+
+image::./img/gitk-gitcola.png[align=center]
+
+Ensuite, j’ai voulu pousser mon commit vers le *dépôt distant* sur GitHub, ce qui est l’équivalent de la commande : `git push`.
+
+Pour cela, j’ai effectué un clic droit dans la branche _main_ du dépôt local puis sélectionné *Pousser*.
+
+image::./img/1-gitcola.png[align=center]
+
+Une demande d’authentification est alors apparue. 
+
+image::./img/auth-gitcola.png[align=center]
+
+J’ai entré mon nom d’utilisateur GitHub, puis mon mot de passe, mais j’ai rencontré une erreur de push. Heureusement, un message m’indiquait où trouver de la https://docs.github.com/fr/get-started/git-basics/about-remote-repositories#cloning-with-https-urls[documentation] pour résoudre ce problème.
+
+image::./img/error-push-gitcola.png[align=center]
+
+Après consultation de la documentation, j’ai compris que, depuis une mise à jour de GitHub, l’utilisation d’un mot de passe n’est plus autorisée pour l’authentification via Git en ligne de commande. À la place, il fallait générer un *Personal Access Token (PAT)*.
+
+image::./img/git-doc.png[align=center]
+
+J’ai donc suivi ces étapes sur GitHub :
+
+====
+. Cliquer sur mon profil > Settings.
+. Faire défiler le menu latéral gauche jusqu’à Developer settings.
+. Aller dans Personal Access Tokens > Tokens (classic).
+. Cliquer sur Generate new token.
+. Générer un token nommé *sae2.03* avec les permissions adaptées: `repo`.
+====
+
+image::./img/git-token.png[align=center]
+
+Une fois le token généré et copié, j’ai réessayé d’effectuer mon push, en utilisant cette fois-ci le token au lieu du mot de passe. Cette fois, l’opération a fonctionné.
+
+J’ai ensuite vérifié sur GitHub que mon commit était bien en ligne.
+
+image::./img/git-push.png[align=center]
+
+Enfin, pour clôturer mon exploration de Git Cola, j’ai affiché le *DAG* _(Directed Acyclic Graph)_, qui représente graphiquement _l’historique des commits_, en allant dans [underline]#Affichage > DAG...#.
+
+image::./img/gad-gitcola.png[align=center]
