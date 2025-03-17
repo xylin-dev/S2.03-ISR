@@ -1,0 +1,89 @@
+==== *Prérequis* 
+====
+. *VirtualBox:* Assurez-vous que VirtualBox est bien installé et fonctionnel avec son «extension pack» sur la machine hôte. Si ce n'est pas le cas, vous pouvez le télécharger et l'installer depuis le site officiel : https://www.virtualbox.org/[VirtualBox].
+. *L'archive contenant les fichiers nécessaires à l’installation d’une Debian sur l’application VirtualBox link:./archive/debian.zip[ici].*
+. *Une image ISO de Debian https://www.debian.org/[disponible ici].*
+. *Une image ISO VBoxGuestAdditions:* Cette image contient les VirtualBox Guest Additions, qui sont un ensemble de pilotes et d'outils destinés à améliorer les performances et l'intégration du système d'exploitation invité (OS dans une machine virtuelle) avec l'hôte (le système d'exploitation de la machine physique). Vous pouvez le télécharger en cliquant https://archive.org/details/VirtualBoxGA-Collection[ici].
+. *Un éditeur de texte pour pouvoir modifier le fichier `preseed-fr.cfg` et `S203-Debian12.viso`.*
+. *Assurez-vous d'avoir au moins 25 Go d'espace libre sur votre disque dur.*
+. *Vous devez avoir au minimum 4 Go de RAM.*
+====
+
+==== *Création de la machine virtuel*
+====
+* Démarrez VirtualBox et créez une nouvelle machine virtuelle en cliquant sur "Nouvelle".
+* Dans la section *Name and Operating System*:
+
+[cols="2,2"]
+|===
+| *Label* | *Input* 
+| Nom | Entrez le nom de la machine (un nom significatif ou symbolique). 
+| Folder | Choisissez le répertoire où votre machine virtuelle sera enregistrée et stockée. 
+| ISO Image | Rien.
+| Edition | Rien.
+| Type | Linux
+| Subtype | Debian
+| Version | Debian 64-bit ou Debian 12 Bookworm
+|===
+
+* Dans la section *Hardware*:
+[cols="2,2"]
+|===
+| *Label* | *Input* 
+| Mémoire vive | 2048MB
+| Processors | 1
+| Enable EFI | ☐
+|===
+
+* Dans la section *Hard Disk*:
+[cols="2,2"]
+|===
+| *Label* | *Input* 
+| Create a Virtual Hark Disk now | Cocher ⦿
+| Hard Disk File Location and Size | Dans le même répertoire que celui mentionné précédemment _(Folder)_, 20 Go d'espace disque suffisent.
+| Hard Disk File Type and Variant | Pas besoin.
+|===
+
+* Cliquez sur "Finish".
+====
+
+==== *Préparation des fichiers nécessaire pour l'installation*
+====
+* Récupérez l'archive contenant les fichiers nécessaires à l’installation de Debian link:./archive/debian.zip[ici] et décompressez-la dans le répertoire où vous avez créé votre machine virtuelle précédemment.
+* Téléchargez l'image https://www.debian.org/[ISO de Debian] ainsi que https://archive.org/details/VirtualBoxGA-Collection[VirtualBox Guest Additions].
+* Une fois les fichiers .iso téléchargée, placez le fichier dans le répertoire *ressource* qui se trouve à l'intérieur de l'archive que vous avez décompressé précédemment.
+* Ouvrez votre Terminal et entrez la commande suivant:
+
+[source, bash]
+----
+cat /proc/sys/kernel/random/uuid
+----
+
+* Copiez le résultat de la commande, puis ouvrez le fichier `S203-Debian12.viso`, qui se trouve dans l’archive décompressée. Remplacez la chaîne `@@UUID@@` par le résultat de la commande en collant ce que vous avez copié.
+* Toujours dans le fichier `S203-Debian12.viso`, remplacez la chaîne située à la troisième ligne `{votre fichier debian[...].iso}` par le nom du fichier Debian ISO que vous avez téléchargé. 
+* Ensuite, à la fin du fichier, remplacez `{votre fichier VBGA.iso}` par le nom de votre fichier *VirtualBox Guest Additions*, qui se trouve dans le répertoire *ressources*. _(Assurez-vous d'ajouter l'extension `.iso` si elle n'apparaît pas lorsque vous collez le nom du fichier.)_
+* Enfin, si nécessaire, et en vous basant sur le https://www.debian.org/releases/stable/amd64/apbs04.fr.html[contenu du fichier de préconfiguration pour Bookworm], vous pouvez modifier le fichier `preseed-fr.cfg`.
+
+====
+
+==== *Installation Automatique de la machine virtuelle*
+====
+Nous arrivons à la fin de la procédure pour l'auto-installation de Debian.  
+
+. Retournez sur VirtualBox.  
+. Sélectionnez la machine virtuelle que vous avez créée.  
+. Cliquez sur *Configuration*.  
+. Allez dans l'onglet *Stockage*.  
+. Sélectionnez *Contrôleur: IDE*, puis cliquez sur l'icône de disque avec un "+".  
+. Cliquez sur *Ajouter*, puis recherchez et sélectionnez `S203-Debian12.viso` dans votre répertoire.  
+. Cliquez sur *Choose*, puis supprimez le disque vide en faisant un clic droit dessus et en sélectionnant *Supprimer*.  
+. Cliquez sur *OK*, puis démarrez votre machine. L'installation automatique débutera.  
+. Une fois l'installation terminée, voici les identifiants de votre machine :
+[cols="2,2"]
+|===
+| *Nom Utilisateur* | *Mot de passe* 
+| root | root
+| user | user
+|===
+
+====

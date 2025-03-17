@@ -1,0 +1,140 @@
+// Partie 2.2 de la semaine 1
+==== *Partie 2.2: Préparation de la Machine Virtuelle*
+* *Que signifie “64-bit” dans “Debian 64-bit” ?* +
+“64-bit” dans “Debian 64-bit” fait référence à la longueur des registres de données et d’adresses utilisés par le processeur de l'ordinateur. + 
+En d’autres termes, un processeur 64 bits peut traiter des données et des instructions en blocs de 64 bits, ce qui lui permet de manipuler des quantités plus importantes d’informations par cycle d’horloge par rapport à un processeur 32 bits.
+
+* *Quelle est la configuration réseau utilisée par défaut ?* +
+La configuration réseau utilisée par défaut est le `DHCP` _(Dynamic Host Configuration Protocol)_ qui consiste à un périphérique d'obtenir automatiquement une adresse IP, un masque de sous-réseau, une passerelle et des serveurs DNS depuis un routeur ou un serveur DHCPfootnote:[https://www.debian.org/doc/manuals/debian-reference/ch05.fr.html[Configuration du réseau - Debian]].
+
+* *Quel est le nom du fichier XML contenant la configuration de votre machine ?* +
+Le fichier *XML* contenant la configuration de notre machine est nommé `Debian-SAE203.vbox` et suit généralement le format *[nom de la machine].vbox*.
+
+* *Sauriez-vous le modifier directement ce fichier de configuration pour mettre 2 processeurs à votre machine ?* +
+Avec nos connaissances actuelles, et en toute honnêteté, non.
+
+// Partie 2.3 de la semaine 1
+==== *Partie 2.3: Installation de l'OS*
+* *Qu’est-ce qu’un fichier iso bootable ?* +
+Un fichier ISO bootable est un fichier permettant à un ordinateur de démarrer directement à travers ce fichier afin d'installer un système d'exploitation sur le disque dur d'un ordinateur. + 
+En effet, il contient les éléments nécessaires au démarrage d’un ordinateur.
+
+* *Qu’est-ce que MATE ? GNOME ?* +
+*MATE* et *GNOME* sont des environnements de bureau _(desktop environment)_ qui sont des logiciels permettant d'utiliser un ordinateur à travers un interface graphique utilisateur _(GUI)_.
+** *MATE* est un dérivé de GNOME 2 qui s'appuie sur des concepts traditionnels pour GNU/Linux et d'autres systèmes d'exploitation de type Unixfootnote:[https://mate-desktop.org/fr/[MATE Desktop]]. Il a été créé pour offrir une alternative aux utilisateurs qui préféraient l'expérience classique de GNOME 2, après que GNOME soit passé à la version 3 avec une interface plus moderne et différente.
+** *GNOME* _(GNU Network Object Model Environment)_ est l'un des environnements de bureau les plus populaires pour Linux et UNIX. En effet, elle est utilisé par défaut dans Red Hat Enterprise Linux, Ubuntu, Debian, Fedora, openSUSE, Vanilla OS, Endless OS, etc.footnote:[https://www.gnome.org/[GNOME]]
+
+* *Qu’est-ce qu’un serveur web ?* +
+Un serveur web peut désigner soit un logiciel assurant le service de ressources web (serveur HTTP), soit un ordinateur dédié à répondre aux requêtes du World Wide Web sur un réseau public (Internet) ou privé (intranet), en utilisant principalement le protocole HTTPfootnote:[https://fr.wikipedia.org/wiki/Serveur_web[Serveur Web - Wikipédia]]. Selon sa nature, il stocke, traite et distribue les fichiers des sites web aux navigateurs des utilisateurs.
+
+* *Qu’est-ce qu’un serveur ssh ?* +
+Le SSH _(Secure Shell)_ désigne à la fois un protocole de communication et un programme informatique. Il permet la connexion d'une machine distante _(serveur)_ via une liaison sécurisée dans le but de transférer des fichiers ou des commandes en toute sécuritéfootnote:[https://blogs.oracle.com/oracle-france/post/definition-ssh[Définition SSH - Oracle]].
+
+* *Qu’est-ce qu’un serveur mandataire ?* +
+Un serveur mandataire _(ou « proxy »)_ est un logiciel intermédiaire qui s’interpose entre deux hôtes afin de faciliter, contrôler ou sécuriser leurs échangesfootnote:[https://fr.wikipedia.org/wiki/Proxy[Proxy - Wikipédia]].
+
+// Partie 3.1 de la semaine 1
+==== *Partie 3.1: Accès `sudo` pour user*
+* *Comment peut-on savoir à quels groupes appartient l’utilisateur user ?* +
+On peut connaître les groupes auxquels appartient l'utilisateur `user` grâce à la commande :
+
+[source, bash]
+----
+groups user
+----
+
+// Partie 3.2 de la semaine 1
+==== *Partie 3.2: Installation des Suppléments Invités*
+* *Quel est la version du noyau Linux utilisé par votre VM ?* +
+La version du noyau Linux _(kernel)_ utilisé par ma VM est `Linux 6.1.0-31-amd64`. On peut le savoir en utilisant la commandefootnote:[https://manpages.debian.org/bookworm/manpages-fr/uname.1.fr.html[UNAME Manuel - Debian]]:
+
+[source, bash]
+----
+uname -r
+----
+
+* *À quoi servent les suppléments invités ? Donner 2 principales raisons de les installer.* +
+Les suppléments invités apportent de nouvelles fonctionnalités entre la machine hôte et invitéfootnote:[https://www.virtualbox.org/manual/ch04.html#guestadd-intro[Guest Additions - VirtualBox]]:
+** *Amélioration de l'intégration de la souris et de l'affichage* entre la machine hôte et invité.
+** *Dossiers partagés* entre la machine hôte et invité.
+
+* *À quoi sert la commande mount (dans notre cas de figure et dans le cas général) ?* 
+
+** *Dans notre cas:* la commande `mount` est utilisée pour monter le CD contenant les suppléments invités de VirtualBox, cela permet d’exécuter ensuite l’installation des additions invitées avec : `sudo /mnt/VBoxLinuxAdditions.run`
+
+** *Dans le cas général:* `mount` sert à attacher des périphériques de stockage _(clés USB, disques durs, partitions, fichiers ISO, partages réseau, etc.)_ à l’arborescence du système, afin d’accéder à son contenufootnote:[https://manpages.debian.org/testing/manpages-fr/mount.8.fr.html[Mount Manuel - Debian]]..
+
+// Partie 4.2 de la semaine 1
+==== *Partie 4.2: Quelques Questions*
+* *1. Qu’est-ce que le Projet Debian ? D’où vient le nom Debian ?* +
+Le "Projet Debian" est une organisation composé de bénévoles et qui a pour but de développer le logiciel libre et promouvoir les idéaux de la communauté du logiciel libre footnote:[https://www.debian.org/releases/stable/amd64/ch01s01.fr.html[Qu'es-ce que Debian?]]. Concernant l'origine du nom Debian, elle est la contraction des noms Debra et Ian Murdock, qui a fondé le projet footnote:[https://www.debian.org/doc/manuals/debian-faq/basic-defs.fr.html#whatisdebian[Comment prononce-t-on Debian et quel est le sens de ce mot ?]].
+// La maintenance
+* *2. Quelle sont les durées de ces prises en charge ?* +
+** La durée minimale est de 3 ans footnote:[https://wiki.debian.org/fr/DebianReleases[DebianReleases]].
+** La durée du LTS est de au moins 5 ans footnote:[https://wiki.debian.org/fr/LTS[Debian Long Term Support]].
+** La durée du eLTS est de 10 ans footnote:[https://wiki.debian.org/fr/LTS/Extended[Extended Long Term Support]].
+* *3. Pendant combien de temps les mises à jour de sécurité seront-elles fournies ?* +
+Les mises à jour de sécurité seront fournis pendant 3 ans après sa publication footnote:[https://www.debian.org/security/faq.fr.html#lifespan[Debian LifeSpan FAQ]].
+// Nom générique, nom de code et version
+* *4. Combien de version au minimum sont activement maintenues par Debian ? Donnez leur nom générique.* +
+Debian a toujours, au minimum, 3 versions activement maintenues : "stable", "testing" et "unstable" footnote:[https://www.debian.org/releases/index.fr.html[Debian Version]].
+* *5. D’où viennent les noms de code donné aux distributions ?* +
+Les noms de code donné aux distributions proviennent des personnages de films "Toy Story" par Pixar footnote:[https://www.debian.org/doc/manuals/debian-faq/ftparchives.fr.html#sourceforcodenames[Source Code Name]]
+* *6. Combien et lesquelles sont prises en charge par la version Bullseye ?* +
+Le nombre d'architecture prise en charge par la version Bullseye est de 9: "amd64", "i386", "ppc64el", "s390x", "armel", "armhf", "arm64", "mipsel" et "mips64el" footnote:[https://wiki.debian.org/DebianBullseye#Architectures[Debian 11 Architectures]].
+
+====
+_La source des questions suivantes est la suivante: https://www.debian.org/doc/manuals/project-history/releases.fr.html[Debian Version]._
+====
+
+* 7. Première version avec un nom de code
+** *Quelle a était le premier nom de code utilisé ?* +
+Le premier nom de code utilisé est Buzz.
+** *Quand a-t-il été annoncé ?* +
+Elle a été annoncée le 17 juin 1996.
+** *Quelle était le numéro de version de cette distribution ?* +
+Le numéro de version de cette distribution est le 1.1.
+* 8. Dernière nom de code attribué
+** *Quel est le dernier nom de code annoncée à ce jour ?* +
+Le dernier nom de code annoncé à ce jour est Trixie.
+** *Quand a-t-il été annoncé ?* +
+Elle a été annoncée en août 2024.
+** *Quelle est la version de cette distribution ?* +
+Le numéro de version de cette distribution est le 13.
+
+// Partie 5.1 de la semaine 1
+==== *Partie 5.1: Récupérer et préparer les fichiers nécessaires*
+
+[NOTE]
+====
+Cette section détaillera tous les ajouts et modifications que j’ai apportés au fichier `preseed-fr.cfg` afin de répondre aux exigences demandées.
+====
+
+* *Ajouter le droit d’utiliser sudo à l’utilisateur standard* +
+En me basant sur le guide de préconfiguration Debian concernant la *https://www.debian.org/releases/stable/amd64/apbs04.fr.html#preseed-account[configuration des comptes]*, j’ai ajouté le groupe *sudo* dans `d-i passwd/user-default-groups`:
+
+[source, ini]
+----
+## Utilisateur standard (~ ligne 50)
+[...]
+d-i passwd/user-default-groups string audio cdrom video sudo
+----
+
+* *Installer l’environnement MATE.* +
+En me basant sur le guide de préconfiguration Debian concernant le *https://www.debian.org/releases/stable/amd64/apbs04.fr.html#preseed-pkgsel[choix des paquets]*, j’ai ajouté *mate-desktop* dans `tasksel tasksel/first`:
+
+[source, ini]
+----
+## Installation meta-paquetages (~ ligne 82)
+[...]
+tasksel tasksel/first multiselect standard, ssh-server, mate-desktop
+----
+
+* *Ajouter les paquets suivants : sudo, git, sqlite3, curl, bash-completion, neofetch*
+En me basant sur le guide de préconfiguration Debian concernant le *https://www.debian.org/releases/stable/amd64/apbs04.fr.html#preseed-pkgsel[choix des paquets]*, j’ai ajouté les lignes suivants:
+
+[source, ini]
+----
+# Paquets supplémentaires (~ ligne 67)
+d-i pkgsel/include string sudo git sqlite3 curl bash-completion neofetch
+----
