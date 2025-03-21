@@ -8,19 +8,19 @@
 
 == Prérequis
 ====
-*Ruby*: AsciiDoctor nécessite `Ruby` pour être exécuté. Assurez-vous d'avoir *Ruby* installé sur votre système. 
+*Ruby*: AsciiDoctor _(version 2.0.23)_ nécessite `Ruby` pour être exécuté. Assurez-vous d'avoir `Ruby` installé sur votre système. 
 
-Vous pouvez vérifier si Ruby est installé en ouvrant l'invite de commande _(cmd)_ et en exécutant la commande : 
+* *Installation sur Linux/macOS:*
+** Exécutez la commande suivante pour installer Ruby : `sudo apt install ruby`. + 
+Cette commande télécharge et installe Ruby ainsi que ses dépendances sur votre système.
 
-[source, bash]
-----
-ruby -v
-----
+* *Installation sur Windows:*
+** Vous pouvez télécharger la dernière version de Ruby en suivant ce lien : https://rubyinstaller.org/downloads/[Ruby Installer for Windows].
 
-Si Ruby n'est pas installé, vous pouvez télécharger la dernière version de Ruby en cliquant ici: https://rubyinstaller.org/downloads/[Ruby Installer for Windows]
+* *Vérification:*
+** Vous pouvez vérifier si *Ruby* est installé en ouvrant un *Terminal* sur Linux/macOS ou l'*invite de commande* _(cmd)_ sur Windows et en exécutant la commande : `ruby -v`.
 
-*Gems* : AsciiDoctor est disponible en tant que `gem` *Ruby* _(framework pour Ruby)_. +
-Assurez-vous que vous avez https://rubygems.org/[RubyGems] installé pour pouvoir installer AsciiDoctor.
+*Gems*: AsciiDoctor est disponible sous forme de gem et est généralement inclus par défaut lors de l’installation de Ruby. Vous pouvez vérifier sa présence en exécutant la commande suivante : `gem -v`.
 ====
 
 == Installation
@@ -28,8 +28,8 @@ Assurez-vous que vous avez https://rubygems.org/[RubyGems] installé pour pouvoi
 ====
 *Installer AsciiDoctor via RubyGems*
 
-* Ouvrez une invite de commande _(cmd)_ ou PowerShell en tant qu'administrateur.
-* Installez le gem AsciiDoctor en exécutant la commande suivante : 
+* Ouvrez un *Terminal* sur Linux/macOS avec les privilèges root/sudo, ou une *invite de commande* _(cmd)_ sur Windows en tant qu'administrateur.
+* Installez le *gem AsciiDoctor* en exécutant la commande suivante : 
 
 [source, bash]
 ----
@@ -76,5 +76,6 @@ asciidoctor-pdf -a pdf-theme=my-theme.yml rapport.adoc
 
 == Ressources et liens utiles
 * https://rubyinstaller.org/downloads/[Ruby Installer for Windows]
+* https://rubygems.org/pages/download[Download RubyGems]
 * https://docs.asciidoctor.org/asciidoc/latest/[Documentation Officielle AsciiDoc]
 * https://docs.asciidoctor.org/asciidoctor/latest/[Documentation Officielle AsciiDoctor]
