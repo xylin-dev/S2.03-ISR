@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
@@ -471,8 +471,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="quoteblock abstract">
 <div class="title">Résumé</div>
 <blockquote>
-Ce rapport documente les différentes étapes et apprentissages réalisés dans le cadre de la SAE 2.03 ISR.<br>
-Il est structuré en plusieurs semaines de travail, chacune abordant un aspect spécifique de l&#8217;installation, de la configuration et de l&#8217;utilisation de divers outils informatiques.
+Ce rapport documente les étapes et apprentissages réalisés durant la SAE2.03 ISR.<br>
+Il est structuré en plusieurs semaines de travail. La première concerne l’installation et la configuration de Debian, avec la mise en place d’une machine virtuelle et l’automatisation de son installation. Ensuite, l’apprentissage du balisage léger qui n&#8217;est pas rédigée. La troisième semaine est dédiée à la recherche et à l’étude des applications clientes Git, comparant différentes interfaces comme <strong>GitK</strong>, <strong>Git-Gui</strong> et <strong>Git Cola</strong>. Enfin, la dernière semaine traite de l’installation et de l’utilisation de <strong>Gitea</strong>, un service d’hébergement Git, en expliquant son installation, ses paramétrages et sa configuration en tant que service.
 </blockquote>
 </div>
 <div style="page-break-after: always;"></div>
@@ -874,11 +874,6 @@ d-i pkgsel/include string sudo git sqlite3 curl bash-completion neofetch</code><
 </div>
 <div class="paragraph">
 <p>Je suis donc allé chercher sur Internet le fichier <strong>VBoxGuestAdditions.iso</strong>. Je l&#8217;ai trouvé sur le site suivant : <a href="https://archive.org/details/VirtualBoxGA-Collection">VirtualBox Guest Additions Collection : Oracle : Free Download, Borrow, and Streaming : Internet Archive</a>.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./img/archive.org.png" alt="archive.org">
-</div>
 </div>
 <div class="paragraph">
 <p>J&#8217;y ai téléchargé la dernière version, modifié son nom et l&#8217;ai placé dans le répertoire où se trouvait le fichier <strong>debian[&#8230;&#8203;].iso</strong>, c&#8217;est-à-dire dans <code>&lt; .\Downloads\SAE-203\Debian-SAE203\autoinstall_iut_salles_TP\ressources &gt;`</code>.</p>
@@ -1714,6 +1709,14 @@ Gitea est une solution logicielle autohébergée et complète pour le développe
 <p><strong>À quels logiciels bien connus dans ce domaine peut-on le comparer ?</strong><br>
 Comme mentionné précédemment, Gitea est une alternative à GitHub, Bitbucket et GitLab, <strong>GitHub et Gitlab</strong> étant les plus connus.</p>
 </li>
+<li>
+<p><strong>Qu’est-ce qu’un fork ?</strong><br>
+Un <strong>fork</strong> c’est quand on prends un projet existant, on le copie pour travailler dessus sans affecter l’original. C’est utile pour tester des idées ou ajouter des fonctionnalités sans risquer de casser ce qui a déjà été fait<sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup>.</p>
+</li>
+<li>
+<p><strong>De quel logiciel Gitea est-il le fork ? Ce logiciel existe-t-il encore ?</strong><br>
+Gitea est le fork du logiciel Gogs<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup> et Gogs existe encore<sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup>.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1724,7 +1727,7 @@ Comme mentionné précédemment, Gitea est une alternative à GitHub, Bitbucket 
 <li>
 <p><strong>Quelle version du binaire avez-vous installé ? Donnez la version et la commande permettant d’obtenir cette information.</strong><br>
 En étant dans le répertoire contenant le fichier binaire de Gitea, j&#8217;exécute la commande : <code>./gitea -v</code>. La commande exécutée retourne le message suivant : <em>"Gitea version 1.23.5 built with GNU Make 4.3, go1.23.7 : bindata, sqlite, sqlite_unlock_notify"</em>.<br>
-<strong>Conclusion, la version du binaire est la 1.23.5</strong> <sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup>.</p>
+<strong>Conclusion, la version du binaire est la 1.23.5</strong> <sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>.</p>
 </li>
 <li>
 <p><strong>Comment faire pour mettre à jour le binaire de votre service sans devoir tout reconfigurer ? Essayez en mettant à jour vers la version 1.22-dev.</strong><br>
@@ -1754,6 +1757,26 @@ Cependant, cette tentative échoue, car il y a un problème de compatibilité av
 </li>
 </ol>
 </div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partie_2_3_pour_aller_plus_loin"><strong>Partie 2.3: Pour aller plus loin</strong></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Qu’est-ce que l’intégration et la livraison continue ?</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CI <em>(intégration continue)</em></strong>: C&#8217;est quand on fusionnes régulièrement notre code avec celui des autres dans la branche principale, et ça déclenche des tests automatiques pour vérifier que tout fonctionne bien ensemble<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup>.</p>
+</li>
+<li>
+<p><strong>CD <em>(livraison continue)</em></strong> : C&#8217;est un peu la suite de l&#8217;intégration continue. Une fois que notre code a passé les tests, il peut être automatiquement déployé sur le serveur ou en production<sup class="footnote">[<a id="_footnoteref_27" class="footnote" href="#_footnotedef_27" title="View footnote.">27</a>]</sup>.</p>
 </li>
 </ul>
 </div>
@@ -1796,7 +1819,7 @@ Cependant, cette tentative échoue, car il y a un problème de compatibilité av
 <div class="paragraph">
 <p>J’ai cliqué sur <strong>"Redirection de port"</strong> et ajouté le port <strong>3000</strong> aussi bien sur la machine hôte que sur l’invité.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/redirection-port.png" alt="redirection port">
 </div>
@@ -1825,10 +1848,12 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">wget -O gitea https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande qui télécharge le fichier gitea-1.23.5-linux-amd64 depuis l'URL donnée et le sauvegarde sous le nom gitea.
+
+wget -O gitea https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64</code></pre>
 </div>
 </div>
-<div id="gitea-install" class="imageblock">
+<div id="gitea-install" class="imageblock text-center">
 <div class="content">
 <img src="./img/installation-gitea.png" alt="installation gitea">
 </div>
@@ -1873,10 +1898,12 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande qui demande à GPG de récupérer la clé publique spécifiée (identifiée par l'ID 7C9E68152594688862D62AF62D9AE806EC1592E2) depuis le serveur de clés keys.openpgp.org.
+
+gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2</code></pre>
 </div>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/gpg.png" alt="gpg">
 </div>
@@ -1886,10 +1913,12 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">wget -O gitea-asc https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64.asc</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande qui télécharge le fichier gitea-1.23.5-linux-amd64.asc depuis l'URL donnée et le sauvegarde sous le nom gitea-asc.
+
+wget -O gitea-asc https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64.asc</code></pre>
 </div>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/asc.png" alt="asc">
 </div>
@@ -1902,7 +1931,7 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Un fichier ASC est une variante du format ASCII, qui est un fichier de cryptage utilisé par Pretty Good Privacy (PGP) pour la protection des communications en ligne.<sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup></p>
+<p>Un fichier ASC est une variante du format ASCII, qui est un fichier de cryptage utilisé par Pretty Good Privacy (PGP) pour la protection des communications en ligne.<sup class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnotedef_28" title="View footnote.">28</a>]</sup></p>
 </div>
 </td>
 </tr>
@@ -1914,7 +1943,7 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 <div class="paragraph">
 <p>Selon la documention si le message renvoyé indique "Bonne signature de « Teabot <a href="mailto:teabot@gitea.io">teabot@gitea.io</a> »", alors tout est bon, malgré l’éventuel avertissement affiché.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/gpg-verify.png" alt="gpg verify">
 </div>
@@ -1925,9 +1954,23 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 <div class="paragraph">
 <p>Ensuite, j’ai tenté d’ajouter l’utilisateur git, mais la commande a échoué car elle nécessitait sudo ou d’être en root.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/adduser.png" alt="adduser">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande qui crée un utilisateur système git avec un répertoire home /home/git, un shell Bash, et un groupe associé git. Le mot de passe est désactivé, ce qui signifie que l'utilisateur ne pourra pas se connecter directement avec un mot de passe.
+
+sudo adduser \
+     --system \
+     --shell /bin/bash \
+     --gecos 'Git Version Control' \
+     --group \
+     --disabled-password \
+     --home /home/git \
+     git</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1935,18 +1978,29 @@ Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">mkdir -p /var/lib/gitea/{custom,data,log}
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Crée les répertoires nécessaires à Gitea
+mkdir -p /var/lib/gitea/{custom,data,log}
+
+# Attribue les permissions appropriées à l'utilisateur 'git'
 chown -R git:git /var/lib/gitea/
+
+# Modifie les permissions des répertoires pour la sécurité
 chmod -R 750 /var/lib/gitea/
+
+# Crée le répertoire de configuration de Gitea
 mkdir /etc/gitea
+
+# Modifie les permissions du répertoire de configuration
 chown root:git /etc/gitea
+
+# Assure que seul l'utilisateur 'git' et 'root' aient accès
 chmod 770 /etc/gitea</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Sans <code>sudo</code>, j’avais plein d’erreurs.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/error-directory.png" alt="error directory">
 </div>
@@ -1955,7 +2009,7 @@ chmod 770 /etc/gitea</code></pre>
 <p>À ce moment-là, j’étais un peu bloqué, car la documentation n’était pas super explicite sur certains points.</p>
 </div>
 <div class="paragraph">
-<p>J’ai donc exploré d’autres sections et découvert la commande <code>gitea web</code> <sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup>.</p>
+<p>J’ai donc exploré d’autres sections et découvert la commande <code>gitea web</code> <sup class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnotedef_29" title="View footnote.">29</a>]</sup>.</p>
 </div>
 <div class="paragraph">
 <p>J’ai voulu l’exécuter, mais ça ne marchait pas car Gitea n’était pas installé.</p>
@@ -1969,7 +2023,7 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>J’ai donc lancé <code>./gitea web</code> depuis le répertoire <strong>Téléchargements/</strong>, ce qui était, spoiler, une erreur.</p>
 </div>
-<div id="gitea_fail" class="imageblock">
+<div id="gitea_fail" class="imageblock text-center">
 <div class="content">
 <img src="./img/web-gitea.png" alt="web gitea">
 </div>
@@ -1977,12 +2031,12 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>J’ai commencé à remplir les champs selon les consignes du PDF:</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/localhost-1.png" alt="localhost 1">
 </div>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/localhost-2.png" alt="localhost 2">
 </div>
@@ -1990,7 +2044,7 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>Au moment de cliquer sur "Installer Gitea", j’ai remarqué un détail qui m’a fait tilt :</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/tilt.png" alt="tilt">
 </div>
@@ -2010,7 +2064,7 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>Cette fois, en exécutant : <code>sudo /var/lib/gitea/gitea web</code>, j’ai eu une erreur.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/error-gitea-web.png" alt="error gitea web">
 </div>
@@ -2044,7 +2098,7 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>J’ai tenté <code>su - git</code>, mais on m’a demandé un mot de passe <em>(alors que <strong>git</strong> n’en avait pas)</em>.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/mdp.png" alt="mdp">
 </div>
@@ -2054,7 +2108,9 @@ chmod 770 /etc/gitea</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">sudo su - git</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande permettant à l'utilisateur courant _(qui doit avoir des droits sudo)_ de devenir l'utilisateur git et de charger l'environnement de cet utilisateur.
+
+sudo su - git</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2063,7 +2119,7 @@ chmod 770 /etc/gitea</code></pre>
 <div class="paragraph">
 <p>Je suis allé dans <strong>/var/lib/gitea/</strong> avec <code>cd /var/lib/gitea/</code> et ai exécuté : <code>./gitea server</code>.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/gitea-web.png" alt="gitea web">
 </div>
@@ -2099,7 +2155,7 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 <div class="paragraph">
 <p>Mais le fichier <strong>app.ini</strong> censé s’y trouver n’existait pas.</p>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./img/app-ini.png" alt="app ini">
 </div>
@@ -2109,7 +2165,9 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">chmod 640 /var/lib/gitea/custom/conf/app.ini</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande permettant de protéger les fichiers de configuration sensibles (comme app.ini pour Gitea) en limitant l'accès en écriture au propriétaire, tout en permettant au groupe de lire ces fichiers pour les consulter si nécessaire.
+
+chmod 640 /var/lib/gitea/custom/conf/app.ini</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2117,20 +2175,18 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">chmod 750 /var/lib/gitea/custom/conf/</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash"># Commande permettant de sécuriser l'accès aux fichiers de configuration de Gitea en restreignant l'accès aux utilisateurs non autorisés tout en permettant à l'utilisateur et au groupe spécifiés de gérer ces fichiers.
+
+chmod 750 /var/lib/gitea/custom/conf/</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="utilisation_gitea"><strong>Utilisation de Gitea</strong></h4>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><strong>Introduction: accéder à mon Localhost depuis mon Téléphone</strong></p>
-</li>
-</ul>
 </div>
-<div class="exampleblock">
+<div id="intro" class="exampleblock">
 <div class="content">
 <div class="paragraph">
 <p>Avant d’inviter mon équipe à me rejoindre sur Gitea pour partager nos codes sources et ressources, je me suis d’abord demandé s’il était possible d’accéder à mon <strong>localhost</strong> depuis mon téléphone.</p>
@@ -2209,7 +2265,7 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </div>
 <div id="no-found" class="imageblock text-center">
 <div class="content">
-<img src="./img/error-gitea.jpg" alt="error gitea">
+<img src="./img/error-gitea.jpg" alt="90%" width="250">
 </div>
 </div>
 <div class="paragraph">
@@ -2260,7 +2316,7 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Révélation</strong></p>
+<p><strong>Troisième tentative</strong></p>
 </li>
 </ul>
 </div>
@@ -2303,7 +2359,7 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./img/lets-go.jpg" alt="lets go">
+<img src="./img/lets-go.jpg" alt="90%" width="250">
 </div>
 </div>
 <div class="ulist">
@@ -2314,7 +2370,7 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </ul>
 </div>
 <div class="paragraph">
-<p>Grâce à ça, j’ai compris l’utilité des cours et comment faire ce qui nous était demandé :</p>
+<p>Grâce à ça, j’ai compris l’utilité des cours dans cette SAE et comment faire ce qui nous était demandé :</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2323,6 +2379,241 @@ J’ai oublié de capturer celle pendant l’installation, mais ça devait être
 </div>
 <div class="paragraph">
 <p>J’ai par la suite demandé à mon équipe de se connecter au Wi-Fi <strong>eduroam</strong> pour accéder à Gitea via mon adresse ip.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Note chronologique :</strong> L’<a href="#intro">introduction</a> de cette section du rapport a été rédigée un samedi.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Partie 1: Que des problèmes mais une solution</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Après avoir compris comment les autres membres de l’équipe pouvaient accéder à mon service Gitea, j’ai laissé mon ordinateur allumé chez moi, connecté au WiFi <strong>eduroam</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Ensuite, je me suis rendu en salle de TP pour demander aux autres de tester l’accès en entrant mon adresse IP suivie du port 3000 : <code>&lt;ip&gt;:3000</code>.</p>
+</div>
+<div class="paragraph">
+<p>Malheureusement, ni eux ni moi ne pouvions y accéder.</p>
+</div>
+<div class="paragraph">
+<p>J’ai d’abord pensé que mon PC s’était éteint, alors je suis retourné vérifier.</p>
+</div>
+<div class="paragraph">
+<p>Une fois arrivé à ma résidence, j’ai constaté que le service fonctionnait parfaitement depuis chez moi, mais qu’il était toujours inaccessible depuis l’IUT.</p>
+</div>
+<div class="paragraph">
+<p>J’en ai alors déduit que le réseau <strong>eduroam</strong> du campus de <strong>Pont de Bois</strong> n’était probablement pas le même que celui de <strong>Cité Scientifique</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Avec mes connaissances actuelles, je suppose qu’il existe plusieurs sous-réseaux <strong>eduroam</strong> selon les campus, mais je n’ai pas approfondi la question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Changement de stratégie</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>J’ai alors décidé de ramener mon ordinateur sur place pour voir si, une fois connecté à eduroam de l’IUT, les autres pouvaient y accéder.</p>
+</div>
+<div class="paragraph">
+<p>Résultat : ça fonctionnait, mais uniquement sur leurs téléphones. Les PC des salles de TP n’étaient pas connectés à eduroam, contrairement à ce que je pensais.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Nouvelle tentative</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Face à ce problème, nous avons décidé d’installer ma machine virtuelle sur les ordinateurs de l’IUT.</p>
+</div>
+<div class="paragraph">
+<p>Cependant, je ne pouvais pas utiliser VirtualBox sur ma session, donc nous avons dû la mettre sur un autre compte.</p>
+</div>
+<div class="paragraph">
+<p>J’ai transféré la VM sur ma carte mémoire, puis sur mon téléphone, avant de la brancher sur un PC de l’IUT.</p>
+</div>
+<div class="paragraph">
+<p>Problème : nous n’avions pas les droits d’écriture sur la carte mémoire, et la seule solution connue pour contourner cela était d’avoir les privilèges sudo.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons ensuite tenté de copier la VM dans le répertoire où l’on nous avait initialement demandé de stocker nos machines virtuelles, mais la copie était extrêmement lente et ne progressait quasiment pas.</p>
+</div>
+<div class="paragraph">
+<p>On a préféré éviter de créer une nouvelle machine virtuelle depuis zéro, par souci de <strong>gain de temps</strong> et parce que <strong>nous ne sommes pas toujours à l’IUT</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Solution alternative : utiliser un tunnel sécurisé</strong>
+Pour ne pas perdre encore plus de temps, nous avons pris une décision radicale : mettre le service en <strong>ligne temporairement</strong> afin qu’il soit accessible depuis n’importe quel appareil, sans dépendre du réseau et du lieu.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Nous avons utilisé <strong>Ngrok</strong>, un outil permettant d’exposer un serveur local sur Internet via un tunnel sécurisé.</p>
+</div>
+<div class="paragraph">
+<p>En clair, Ngrok génère une URL publique temporaire que l’on peut partager pour accéder au service local sans avoir besoin de configuration réseau complexe.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/ngrok.png" alt="ngrok">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>J’ai installé <strong>Ngrok</strong> sur mon PC</p>
+</li>
+<li>
+<p>J’ai démarré ma machine virtuelle et lancé Gitea sur mon serveur local</p>
+</li>
+<li>
+<p>J’ai exécuté <code>ngrok http 3000</code> pour générer une URL publique</p>
+</li>
+<li>
+<p>Pour obtenir une <strong>URL stable</strong> qui ne change pas à chaque exécution, j’ai enregistré un sous-domaine sur le site de Ngrok</p>
+</li>
+<li>
+<p>Désormais, avec la commande : <code>ngrok http --url=large-goat-moving.ngrok-free.app 3000</code>, tout le monde pouvait accéder à mon serveur local en visitant l’URL <strong>large-goat-moving.ngrok-free.app</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/ngrok-cmd.png" alt="ngrok cmd">
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Partie 2: Utilisation collaborative de Gitea</strong></p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Une fois que tout le monde avait accès au service, peu importe sa localisation, <strong>chacun a créé</strong> son compte sur Gitea.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/user-gitea.png" alt="user gitea">
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons ensuite créé une organisation nommée <strong>SAE2.03</strong>, dans laquelle nous avons formé une équipe regroupant tous les membres de l&#8217;équipe.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/equipe.png" alt="equipe">
+</div>
+</div>
+<div class="paragraph">
+<p>Puis, nous avons mis en place un nouveau dépôt nommé <code>sae203-source</code>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/repo.png" alt="repo">
+</div>
+</div>
+<div class="paragraph">
+<p>Où chacun d’entre nous a push/téléversé sa partie du rapport.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/log.png" alt="log">
+</div>
+</div>
+<div class="paragraph">
+<p>Dans ce repository, nous n’avons pas jugé utile de configurer des permissions spécifiques, car il était exclusivement destiné à notre équipe et les consignes ne semblaient pas l’exiger à ce stade.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/all-perms.png" alt="all perms">
+</div>
+</div>
+<div class="paragraph">
+<p>Cependant, nous avons, par la suite, décidé de créer une autre équipe avec des <strong>permissions de lecture</strong> ou <strong>aucun accès</strong>, au cas où les membres du groupe E souhaiteraient jeter un œil et tester notre service Gitea.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/perms.png" alt="perms">
+</div>
+</div>
+<div class="paragraph">
+<p>Dans cette équipe, nous avons, pour l&#8217;instant, uniquement ajouté les utilisateurs concernés par la prochaine étape des consignes, afin de limiter l’accès aux personnes réellement impliquées.</p>
+</div>
+<div class="paragraph">
+<p>Ensuite, nous avons chacun repris sa <strong>SAE1.02</strong> <em>(concernant le logiciel ludopédagogique)</em>, faute d’accès aux fichiers de nos TP à ce moment-là, et nous avons chacun créé son propre repositorie afin d’y <strong>push/pull</strong> nos fichiers ou de les <strong>téléverser directement</strong> via l’interface web.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/dépots.png" alt="dépots">
+</div>
+</div>
+<div class="paragraph">
+<p>Nous avons aussi invité d’autres personnes ayant participé à nos projets de SAE pour compléter nos dépôts.</p>
+</div>
+<div class="paragraph">
+<p>Nous avons également configuré les permissions :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Administration</strong> : réservée au propriétaire du dépôt.</p>
+</li>
+<li>
+<p><strong>Écriture</strong> : attribuée aux membres ayant travaillé avec nous sur la SAE, leur permettant de modifier les dépôts.</p>
+</li>
+<li>
+<p><strong>Lecture</strong> : pour ceux qui devaient uniquement consulter les fichiers, sans possibilité de modification.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/perms-repo.png" alt="perms repo">
+</div>
+</div>
+<div class="paragraph">
+<p>Enfin, nous avons réalisé des tests afin de vérifier s’il était possible de <strong>push</strong> dans des repositories où nous n’avions pas les droits nécessaires.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/texte.png" alt="texte">
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/no-push.png" alt="no push">
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./img/image.png" alt="image">
+</div>
+<div class="title">Option pour téléverser inexistant</div>
+</div>
+<div class="paragraph">
+<p>Pour finir, nous avons utilisé Gitea comme nous utilisons habituellement GitHub ou GitLab, en testant les différentes fonctionnalités et en nous assurant de bien comprendre son fonctionnement.</p>
 </div>
 </div>
 </div>
@@ -2841,18 +3132,33 @@ sudo chmod 640 /var/lib/gitea/custom/conf/app.ini</code></pre>
 <a href="#_footnoteref_21">21</a>. <a href="https://docs.gitea.com/next/">What is Gitea?</a>
 </div>
 <div class="footnote" id="_footnotedef_22">
-<a href="#_footnoteref_22">22</a>. <a href="https://docs.gitea.com/next/administration/ommand-line#global-options">Global Options - Gitea Command Line</a>
+<a href="#_footnoteref_22">22</a>. <a href="https://fr.wikipedia.org/wiki/Fork_(d%C3%A9veloppement_logiciel)">Wikipédia: Fork (développement logiciel)</a>
 </div>
 <div class="footnote" id="_footnotedef_23">
-<a href="#_footnoteref_23">23</a>. <a href="https://www.adobe.com/fr/acrobat/resources/document-files/text-files/asc.html#que-sont-les-fichiers-au-format-asc-et-ascii-">Que sont les fichiers au format ASC et ASCII ?</a>
+<a href="#_footnoteref_23">23</a>. <a href="https://docs.gitea.com/next/">What is Gitea?</a>
 </div>
 <div class="footnote" id="_footnotedef_24">
-<a href="#_footnoteref_24">24</a>. <a href="https://docs.gitea.com/next/administration/command-line#web">Gitea Command Line - Web</a>
+<a href="#_footnoteref_24">24</a>. <a href="https://gogs.io/">Gogs - Un service git auto-hébergé sans-douleur.</a>
+</div>
+<div class="footnote" id="_footnotedef_25">
+<a href="#_footnoteref_25">25</a>. <a href="https://docs.gitea.com/next/administration/ommand-line#global-options">Global Options - Gitea Command Line</a>
+</div>
+<div class="footnote" id="_footnotedef_26">
+<a href="#_footnoteref_26">26</a>. <a href="https://about.gitlab.com/fr-fr/topics/ci-cd/#what-is-continuous-integration-ci">Qu&#8217;est-ce que l&#8217;intégration continue (CI) ?</a>
+</div>
+<div class="footnote" id="_footnotedef_27">
+<a href="#_footnoteref_27">27</a>. <a href="https://about.gitlab.com/fr-fr/topics/ci-cd/#what-is-continuous-integration-ci">Qu&#8217;est-ce que la livraison continue (CD) ?</a>
+</div>
+<div class="footnote" id="_footnotedef_28">
+<a href="#_footnoteref_28">28</a>. <a href="https://www.adobe.com/fr/acrobat/resources/document-files/text-files/asc.html#que-sont-les-fichiers-au-format-asc-et-ascii-">Que sont les fichiers au format ASC et ASCII ?</a>
+</div>
+<div class="footnote" id="_footnotedef_29">
+<a href="#_footnoteref_29">29</a>. <a href="https://docs.gitea.com/next/administration/command-line#web">Gitea Command Line - Web</a>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-16 15:34:36 +0100
+Last updated 2025-03-22 14:10:42 +0100
 </div>
 </div>
 </body>

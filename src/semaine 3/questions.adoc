@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 ==== *Partie 1.2: Les interfaces graphiques pour git*
 * *Qu’est-ce que le logiciel gitk ? Comment se lance-t-il ?* +
 `gitk` est un logiciel qui affiche l'historique des *commits* d'un dépôt Git. Il affiche les branches, les tags, et les modifications dans une vue arborescentefootnote:[https://git-scm.com/docs/gitk[Git - gitk Documentation]]. Il se lance en exécutant la commande suivante dans un terminal, depuis le répertoire d’un dépôt Git :

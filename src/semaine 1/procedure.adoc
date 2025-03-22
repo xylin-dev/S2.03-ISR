@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 ==== *Prérequis* 
 ====
 . *VirtualBox:* Assurez-vous que VirtualBox est bien installé et fonctionnel avec son «extension pack» sur la machine hôte. Si ce n'est pas le cas, vous pouvez le télécharger et l'installer depuis le site officiel : https://www.virtualbox.org/[VirtualBox].

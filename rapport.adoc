@@ -2,7 +2,7 @@
 :toc: left
 :icons: font
 :lang: fr
-:encoding: utf-8
+:encoding: UTF-8
 :doctype: article
 :figure-caption!:
 :pdf-fontsdir: font
@@ -11,8 +11,8 @@
 
 [abstract]
 .Résumé
-
-Ce rapport documente les différentes étapes et apprentissages réalisés dans le cadre de la SAE 2.03 ISR. Il est structuré en plusieurs semaines de travail, chacune abordant un aspect spécifique de l'installation, de la configuration et de l'utilisation de divers outils informatiques.
+Ce rapport documente les étapes et apprentissages réalisés durant la SAE2.03 ISR. + 
+Il est structuré en plusieurs semaines de travail. La première concerne l’installation et la configuration de Debian, avec la mise en place d’une machine virtuelle et l’automatisation de son installation. Ensuite, l’apprentissage du balisage léger qui n'est pas rédigée. La troisième semaine est dédiée à la recherche et à l’étude des applications clientes Git, comparant différentes interfaces comme *GitK*, *Git-Gui* et *Git Cola*. Enfin, la dernière semaine traite de l’installation et de l’utilisation de *Gitea*, un service d’hébergement Git, en expliquant son installation, ses paramétrages et sa configuration en tant que service.
 
 <<<
 

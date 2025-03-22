@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 L'automatisation de l'installation d'un système d'exploitation comme Debian simplifie et optimise le déploiement, tout en réduisant les risques d'erreurs humaines. De plus, cela permet de se détendre et de jouer à Minecraft pendant que l'installation se fait, sans avoir à intervenir.
 
 Cette section présente les étapes et les choix techniques qui ont permis de mettre en place un processus d'installation automatisée pour Debian sur Windows. 
@@ -48,8 +50,6 @@ J'ai redémarré la machine, mais une nouvelle erreur est apparue, différente d
 image::./img/error-vbga.png[align=center]
 
 Je suis donc allé chercher sur Internet le fichier *VBoxGuestAdditions.iso*. Je l'ai trouvé sur le site suivant : https://archive.org/details/VirtualBoxGA-Collection[VirtualBox Guest Additions Collection : Oracle : Free Download, Borrow, and Streaming : Internet Archive]. 
-
-image::./img/archive.org.png[align=center]
 
 J'y ai téléchargé la dernière version, modifié son nom et l'ai placé dans le répertoire où se trouvait le fichier *debian[...].iso*, c'est-à-dire dans `< .\Downloads\SAE-203\Debian-SAE203\autoinstall_iut_salles_TP\ressources >``. 
 

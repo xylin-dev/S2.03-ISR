@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 ==== Prérequis pour l’installation de Gitea
 ====
 Avant de procéder à l’installation de Gitea sur une machine Debian, assurez-vous de remplir les conditions suivantes :

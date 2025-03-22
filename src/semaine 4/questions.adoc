@@ -1,9 +1,18 @@
+:encoding: UTF-8
+
 ==== *Partie 2.0: Installation de Gitea*
 * *Qu’est-ce que Gitea ?* +
 Gitea est une solution logicielle autohébergée et complète pour le développement logiciel. Elle offre l'hébergement Git, la gestion des revues de code, la collaboration en équipe, un registre de packages ainsi que des fonctionnalités d'intégration et de déploiement continus. Légère et facile à utiliser, Gitea constitue une alternative à GitHub, Bitbucket et GitLab.footnote:[https://docs.gitea.com/next/[What is Gitea?]]
 
 * *À quels logiciels bien connus dans ce domaine peut-on le comparer ?* +
 Comme mentionné précédemment, Gitea est une alternative à GitHub, Bitbucket et GitLab, *GitHub et Gitlab* étant les plus connus.
+
+* *Qu’est-ce qu’un fork ?* +
+Un *fork* c’est quand on prends un projet existant, on le copie pour travailler dessus sans affecter l’original. C’est utile pour tester des idées ou ajouter des fonctionnalités sans risquer de casser ce qui a déjà été faitfootnote:[https://fr.wikipedia.org/wiki/Fork_(d%C3%A9veloppement_logiciel)[Wikipédia: Fork (développement logiciel)]].
+
+* *De quel logiciel Gitea est-il le fork ? Ce logiciel existe-t-il encore ?* +
+Gitea est le fork du logiciel Gogsfootnote:[https://docs.gitea.com/next/[What is Gitea?]] et Gogs existe encorefootnote:[https://gogs.io/[Gogs - Un service git auto-hébergé sans-douleur.]].
+
 
 ==== *Partie 2.1.2: Mise à jour du binaire du service Gitea*
 * *Quelle version du binaire avez-vous installé ? Donnez la version et la commande permettant d’obtenir cette information.* +
@@ -21,3 +30,8 @@ Cependant, cette tentative échoue, car il y a un problème de compatibilité av
 +
 Cela indique que la version de la base de données est plus récente que la version de Gitea que j'essaie d'utiliser. Pour résoudre ce problème, je dois soit de [green]#mettre à jour Gitea vers une version plus récente qui correspond à la version actuelle de la base de données#, soit de [green]#revenir à une version de Gitea compatible avec la version de la base de données actuelle#.
 . Du coup, je décide de retenter l'opération avec la *version 1.24.3 amd64* de Gitea en utilisant les mêmes procédés, et cette fois-ci, cela fonctionne.
+
+==== *Partie 2.3: Pour aller plus loin*
+* *Qu’est-ce que l’intégration et la livraison continue ?*
+** *CI _(intégration continue)_*: C'est quand on fusionnes régulièrement notre code avec celui des autres dans la branche principale, et ça déclenche des tests automatiques pour vérifier que tout fonctionne bien ensemblefootnote:[https://about.gitlab.com/fr-fr/topics/ci-cd/#what-is-continuous-integration-ci[Qu'est-ce que l'intégration continue (CI) ?]]. 
+** *CD _(livraison continue)_* : C'est un peu la suite de l'intégration continue. Une fois que notre code a passé les tests, il peut être automatiquement déployé sur le serveur ou en productionfootnote:[https://about.gitlab.com/fr-fr/topics/ci-cd/#what-is-continuous-integration-ci[Qu'est-ce que la livraison continue (CD) ?]].

@@ -3,34 +3,89 @@ extends: default
 font:
   catalog:
     merge: true
-    OpenSans:
-      normal: ../font/OpenSans-Regular.ttf
-      bold: ../font/OpenSans-Bold.ttf
-      italic: ../font/OpenSans-Italic.ttf
-      bold_italic: ../font/OpenSans-BoldItalic.ttf
+    Noto:
+      normal: GEM_FONTS_DIR/notoserif-regular-subset.ttf
+      bold: GEM_FONTS_DIR/notoserif-bold-subset.ttf
+      italic: GEM_FONTS_DIR/notoserif-italic-subset.ttf
+      bold_italic: GEM_FONTS_DIR/notoserif-bold_italic-subset.ttf
+    Cascadia:
+      normal: ../font/Cascadia.ttf
 
 base:
-  font-family: OpenSans
+  font-family: Noto
   font-size: 12
   line-height: 1.5
 
+page:
+  margin: [45,45,45,45]
+
 heading:
   h1:
-    font-size: 24
-    font-color: #a4432f
-    font-style: bold
-    text-align: center
+    font_size: 24
+    font_color: #a4442d
+    font_style: bold
   h2:
-    font-size: 20
-    font-color: #a4432f
-    font-style: bold
-    text-align: center
+    font_size: 18
+    font_color: #a4442d
+    font_style: bold
   h3:
-    font-size: 16
-    font-color: #a4432f
-    font-style: bold
-    text-align: center
+    font_size: 14
+    font_color: #a4442d
+    font_style: bold
   h4:
-    font-size: 12
-    font-color: #bf562c
-    font-style: bold
+    font_size: 12
+    font_color: #a4442d
+    font_style: bold
+
+header:
+  height: 30
+  line_height: 0.5
+  border_color: #CCCCCC
+  border_width: 1
+  recto:
+    right:
+      content: "{chapter-title}"
+  verso:
+    left:
+      content: "{chapter-section}" 
+
+footer:
+  height: 30
+  line_height: 1
+  border_color: #CCCCCC
+  border_width: 1
+  recto:
+    right:
+      content: "{page-number}"
+  verso:
+    left:
+      content: "{page-number}"
+
+code:
+  font_color: #FFFFFF
+  background_color: #333333
+  font_family: Cascadia
+  font_size: 9
+  border_width: 2
+  border_color: #666666
+
+sidebar:
+  border_color: #000000
+  border_width: 2
+  border_radius: 5
+  padding: [10, 10, 10, 10]  
+  background_color: #fffcf4 
+
+link:
+  font_color: #315399
+  font_style: underline
+
+xref:
+  font_color: #007700
+  font_style: italic
+
+table:
+  font_size: 10
+  border_width: 1
+  border_color: #808080
+

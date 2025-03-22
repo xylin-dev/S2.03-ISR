@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 ==== *Configuration Globale de Git*
 J’ai commencé par ouvrir ma machine virtuelle et utiliser le raccourci clavier *Ctrl+Alt+T* pour ouvrir le Terminal.
 

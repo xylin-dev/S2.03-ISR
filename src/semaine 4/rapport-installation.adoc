@@ -1,10 +1,12 @@
+:encoding: UTF-8
+
 [[installation_gitea]]
 ==== *Installation de Gitea*
 J’ai commencé par configurer la redirection de port en allant dans la *"Configuration"* de ma machine virtuelle, section *"Réseau"*. 
 
 J’ai cliqué sur *"Redirection de port"* et ajouté le port *3000* aussi bien sur la machine hôte que sur l’invité. 
 
-image::./img/redirection-port.png[]
+image::./img/redirection-port.png[align=center]
 
 Je n'ai pas besoin de toucher au *mode d’accès réseau*, qui était par défaut en NAT. +
 Ensuite, j’ai démarré ma machine pour commencer l’installation de Gitea.
@@ -23,12 +25,14 @@ Dans mon terminal, j’ai téléchargé le fichier avec :
 
 [source, bash]
 ----
+# Commande qui télécharge le fichier gitea-1.23.5-linux-amd64 depuis l'URL donnée et le sauvegarde sous le nom gitea.
+
 wget -O gitea https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64
 ----
 
 [[gitea-install]]
 .Téléchargement du fichier binaire de Gitea
-image::./img/installation-gitea.png[]
+image::./img/installation-gitea.png[align=center]
 
 Après l'installation, j'ai rendu le fichier exécutable en utilisant la commande `chmod +x gitea`.
 
@@ -48,19 +52,23 @@ J’ai récupéré la clé publique avec :
 
 [source, bash]
 ----
+# Commande qui demande à GPG de récupérer la clé publique spécifiée (identifiée par l'ID 7C9E68152594688862D62AF62D9AE806EC1592E2) depuis le serveur de clés keys.openpgp.org.
+
 gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2
 ----
 
-image::./img/gpg.png[]
+image::./img/gpg.png[align=center]
 
 Puis, j’ai téléchargé le fichier *.asc* associé au binaire, de la même manière que link:#gitea-install[gitea]:
 
 [source, bash]
 ----
+# Commande qui télécharge le fichier gitea-1.23.5-linux-amd64.asc depuis l'URL donnée et le sauvegarde sous le nom gitea-asc.
+
 wget -O gitea-asc https://dl.gitea.com/gitea/1.23.5/gitea-1.23.5-linux-amd64.asc
 ----
 
-image::./img/asc.png[]
+image::./img/asc.png[align=center]
 
 [NOTE]
 ====
@@ -71,29 +79,54 @@ J’ai vérifié la signature avec la commande `gpg --verify gitea-asc gitea`.
 
 Selon la documention si le message renvoyé indique "Bonne signature de « Teabot teabot@gitea.io »", alors tout est bon, malgré l’éventuel avertissement affiché.
 
-image::./img/gpg-verify.png[]
+image::./img/gpg-verify.png[align=center]
 
 Après ça, j’ai vérifié que ma version de git était bien supérieure à 2.0 avec `git -v`, j’ai 2.39.5. 
 
 Ensuite, j’ai tenté d’ajouter l’utilisateur git, mais la commande a échoué car elle nécessitait sudo ou d’être en root.
 
-image::./img/adduser.png[]
+image::./img/adduser.png[align=center]
+
+[source, bash]
+----
+# Commande qui crée un utilisateur système git avec un répertoire home /home/git, un shell Bash, et un groupe associé git. Le mot de passe est désactivé, ce qui signifie que l'utilisateur ne pourra pas se connecter directement avec un mot de passe.
+
+sudo adduser \
+     --system \
+     --shell /bin/bash \
+     --gecos 'Git Version Control' \
+     --group \
+     --disabled-password \
+     --home /home/git \
+     git
+----
 
 Même problème pour la création des répertoires nécessaires à Gitea :
 
 [source, bash]
 ----
+# Crée les répertoires nécessaires à Gitea
 mkdir -p /var/lib/gitea/{custom,data,log}
+
+# Attribue les permissions appropriées à l'utilisateur 'git'
 chown -R git:git /var/lib/gitea/
+
+# Modifie les permissions des répertoires pour la sécurité
 chmod -R 750 /var/lib/gitea/
+
+# Crée le répertoire de configuration de Gitea
 mkdir /etc/gitea
+
+# Modifie les permissions du répertoire de configuration
 chown root:git /etc/gitea
+
+# Assure que seul l'utilisateur 'git' et 'root' aient accès
 chmod 770 /etc/gitea
 ----
 
 Sans `sudo`, j’avais plein d’erreurs.
 
-image::./img/error-directory.png[]
+image::./img/error-directory.png[align=center]
 
 À ce moment-là, j’étais un peu bloqué, car la documentation n’était pas super explicite sur certains points. 
 
@@ -108,17 +141,17 @@ Mais après 15 minutes, j’avais oublié certaines commandes utilisées précé
 J’ai donc lancé `./gitea web` depuis le répertoire *Téléchargements/*, ce qui était, spoiler, une erreur.
 
 [[gitea_fail]]
-image::./img/web-gitea.png[]
+image::./img/web-gitea.png[align=center]
 
 J’ai commencé à remplir les champs selon les consignes du PDF:
 
-image::./img/localhost-1.png[]
+image::./img/localhost-1.png[align=center]
 
-image::./img/localhost-2.png[]
+image::./img/localhost-2.png[align=center]
 
 Au moment de cliquer sur "Installer Gitea", j’ai remarqué un détail qui m’a fait tilt :
 
-image::./img/tilt.png[]
+image::./img/tilt.png[align=center]
 
 En fait, la documentation mentionnait *app.ini*, qui devait se trouver dans */etc/gitea*, j'ai compris que je faisais n'importe quoi, mais j'ai aussi compris comment procéder. 
 
@@ -130,7 +163,7 @@ La commande `sudo mkdir -p /var/lib/gitea/{custom,data,log}` montrait où je dev
 
 Cette fois, en exécutant : `sudo /var/lib/gitea/gitea web`, j’ai eu une erreur.
 
-image::./img/error-gitea-web.png[]
+image::./img/error-gitea-web.png[align=center]
 
 Après un moment de réflexion, je suis retourné voir la doc et j’ai *(re)découvert* que l’utilisateur *git* devait avoir les droits sur le répertoire : `chown -R git:git /var/lib/gitea/`
 
@@ -147,12 +180,14 @@ Une recherche m’a mené à cet article : https://fr.linux-console.net/?p=20137
 
 J’ai tenté `su - git`, mais on m’a demandé un mot de passe _(alors que *git* n’en avait pas)_.
 
-image::./img/mdp.png[]
+image::./img/mdp.png[align=center]
 
 Après plusieurs essais (root, user, git…), rien ne fonctionnait. En relisant, l'article, je suis tombé sur la bonne méthode :
 
 [source, bash]
 ----
+# Commande permettant à l'utilisateur courant _(qui doit avoir des droits sudo)_ de devenir l'utilisateur git et de charger l'environnement de cet utilisateur.
+
 sudo su - git
 ----
 
@@ -160,7 +195,7 @@ sudo su - git
 
 Je suis allé dans */var/lib/gitea/* avec `cd /var/lib/gitea/` et ai exécuté : `./gitea server`.
 
-image::./img/gitea-web.png[]
+image::./img/gitea-web.png[align=center]
 
 [NOTE]
 ====
@@ -176,12 +211,14 @@ Selon la documentation, il faut sécuriser */etc/gitea/* avec : `chmod 750 /etc/
 
 Mais le fichier *app.ini* censé s’y trouver n’existait pas.
 
-image::./img/app-ini.png[]
+image::./img/app-ini.png[align=center]
 
 J’ai donc sécurisé celui qui était dans /var/lib/gitea/custom/conf/ avec :
 
 [source, bash]
 ----
+# Commande permettant de protéger les fichiers de configuration sensibles (comme app.ini pour Gitea) en limitant l'accès en écriture au propriétaire, tout en permettant au groupe de lire ces fichiers pour les consulter si nécessaire.
+
 chmod 640 /var/lib/gitea/custom/conf/app.ini
 ----
 
@@ -189,5 +226,7 @@ Et pour être sûr :
 
 [source, bash]
 ----
+# Commande permettant de sécuriser l'accès aux fichiers de configuration de Gitea en restreignant l'accès aux utilisateurs non autorisés tout en permettant à l'utilisateur et au groupe spécifiés de gérer ces fichiers.
+
 chmod 750 /var/lib/gitea/custom/conf/
 ----

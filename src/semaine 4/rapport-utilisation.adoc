@@ -1,8 +1,11 @@
+:encoding: UTF-8
+
 [[utilisation_gitea]]
 ==== *Utilisation de Gitea*
 
-* *Introduction: accéder à mon Localhost depuis mon Téléphone*
+*Introduction: accéder à mon Localhost depuis mon Téléphone*
 
+[[intro]]
 ====
 Avant d’inviter mon équipe à me rejoindre sur Gitea pour partager nos codes sources et ressources, je me suis d’abord demandé s’il était possible d’accéder à mon *localhost* depuis mon téléphone.
 
@@ -42,7 +45,7 @@ image::./img/gitea-firefox.png[align=center]
 Mais en essayant sur le navigateur de mon téléphone, ça ne marchait pas.
 
 [[no-found]]
-image::./img/error-gitea.jpg[align=center]
+image::./img/error-gitea.jpg[90%, 250, align=center]
 
 Pour vérifier si le problème venait de moi, j’ai ouvert le *cmd* sur ma machine hôte et tenté un `ping` :
 
@@ -69,7 +72,7 @@ image::./img/edge.png[align=center]
 
 Mais sur mon téléphone, même écran d’erreur qu’avec le link:#no-found[précédent]...
 
-* *Révélation*
+* *Troisième tentative*
 
 J’ai bloqué un moment en me demandant ce que j’avais fait de travers. 
 
@@ -93,14 +96,127 @@ Mon PC était connecté à *eduroam*, tandis que mon téléphone était sur le W
 
 Je me suis connecté à *eduroam* sur mon téléphone, retenté l’accès, et bingo, ça marchait!
 
-image::./img/lets-go.jpg[align=center]
+image::./img/lets-go.jpg[90%, 250, align=center]
 
 * *Conclusion*
 
-Grâce à ça, j’ai compris l’utilité des cours et comment faire ce qui nous était demandé :
+Grâce à ça, j’ai compris l’utilité des cours dans cette SAE et comment faire ce qui nous était demandé :
 
 image::./img/consigne.png[align=center]
 
 J’ai par la suite demandé à mon équipe de se connecter au Wi-Fi *eduroam* pour accéder à Gitea via mon adresse ip.
 ====
 
+[NOTE]
+====
+*Note chronologique :* L’link:#intro[introduction] de cette section du rapport a été rédigée un samedi.
+====
+
+*Partie 1: Que des problèmes mais une solution*
+
+====
+Après avoir compris comment les autres membres de l’équipe pouvaient accéder à mon service Gitea, j’ai laissé mon ordinateur allumé chez moi, connecté au WiFi *eduroam*. 
+
+Ensuite, je me suis rendu en salle de TP pour demander aux autres de tester l’accès en entrant mon adresse IP suivie du port 3000 : `<ip>:3000`.
+
+Malheureusement, ni eux ni moi ne pouvions y accéder. 
+
+J’ai d’abord pensé que mon PC s’était éteint, alors je suis retourné vérifier. 
+
+Une fois arrivé à ma résidence, j’ai constaté que le service fonctionnait parfaitement depuis chez moi, mais qu’il était toujours inaccessible depuis l’IUT.
+
+J’en ai alors déduit que le réseau *eduroam* du campus de *Pont de Bois* n’était probablement pas le même que celui de *Cité Scientifique*. 
+
+Avec mes connaissances actuelles, je suppose qu’il existe plusieurs sous-réseaux *eduroam* selon les campus, mais je n’ai pas approfondi la question.
+
+* *Changement de stratégie*
+
+J’ai alors décidé de ramener mon ordinateur sur place pour voir si, une fois connecté à eduroam de l’IUT, les autres pouvaient y accéder.
+
+Résultat : ça fonctionnait, mais uniquement sur leurs téléphones. Les PC des salles de TP n’étaient pas connectés à eduroam, contrairement à ce que je pensais.
+
+* *Nouvelle tentative*
+
+Face à ce problème, nous avons décidé d’installer ma machine virtuelle sur les ordinateurs de l’IUT. 
+
+Cependant, je ne pouvais pas utiliser VirtualBox sur ma session, donc nous avons dû la mettre sur un autre compte.
+
+J’ai transféré la VM sur ma carte mémoire, puis sur mon téléphone, avant de la brancher sur un PC de l’IUT. 
+
+Problème : nous n’avions pas les droits d’écriture sur la carte mémoire, et la seule solution connue pour contourner cela était d’avoir les privilèges sudo.
+
+Nous avons ensuite tenté de copier la VM dans le répertoire où l’on nous avait initialement demandé de stocker nos machines virtuelles, mais la copie était extrêmement lente et ne progressait quasiment pas.
+
+On a préféré éviter de créer une nouvelle machine virtuelle depuis zéro, par souci de *gain de temps* et parce que *nous ne sommes pas toujours à l’IUT*.
+
+* *Solution alternative : utiliser un tunnel sécurisé*
+Pour ne pas perdre encore plus de temps, nous avons pris une décision radicale : mettre le service en *ligne temporairement* afin qu’il soit accessible depuis n’importe quel appareil, sans dépendre du réseau et du lieu.
+
+Nous avons utilisé *Ngrok*, un outil permettant d’exposer un serveur local sur Internet via un tunnel sécurisé. 
+
+En clair, Ngrok génère une URL publique temporaire que l’on peut partager pour accéder au service local sans avoir besoin de configuration réseau complexe.
+
+image::./img/ngrok.png[align=center]
+
+. J’ai installé *Ngrok* sur mon PC
+. J’ai démarré ma machine virtuelle et lancé Gitea sur mon serveur local
+. J’ai exécuté `ngrok http 3000` pour générer une URL publique
+. Pour obtenir une *URL stable* qui ne change pas à chaque exécution, j’ai enregistré un sous-domaine sur le site de Ngrok
+. Désormais, avec la commande : `ngrok http --url=large-goat-moving.ngrok-free.app 3000`, tout le monde pouvait accéder à mon serveur local en visitant l’URL *large-goat-moving.ngrok-free.app*
+
+image::./img/ngrok-cmd.png[align=center]
+====
+
+*Partie 2: Utilisation collaborative de Gitea*
+
+====
+Une fois que tout le monde avait accès au service, peu importe sa localisation, *chacun a créé* son compte sur Gitea.
+
+image::./img/user-gitea.png[align=center]
+
+Nous avons ensuite créé une organisation nommée *SAE2.03*, dans laquelle nous avons formé une équipe regroupant tous les membres de l'équipe.
+
+image::./img/equipe.png[align=center]
+
+Puis, nous avons mis en place un nouveau dépôt nommé `sae203-source`.
+
+image::./img/repo.png[align=center]
+
+Où chacun d’entre nous a push/téléversé sa partie du rapport.
+
+image::./img/log.png[align=center]
+
+Dans ce repository, nous n’avons pas jugé utile de configurer des permissions spécifiques, car il était exclusivement destiné à notre équipe et les consignes ne semblaient pas l’exiger à ce stade.
+
+image::./img/all-perms.png[align=center]
+
+Cependant, nous avons, par la suite, décidé de créer une autre équipe avec des *permissions de lecture* ou *aucun accès*, au cas où les membres du groupe E souhaiteraient jeter un œil et tester notre service Gitea.
+
+image::./img/perms.png[align=center]
+
+Dans cette équipe, nous avons, pour l'instant, uniquement ajouté les utilisateurs concernés par la prochaine étape des consignes, afin de limiter l’accès aux personnes réellement impliquées.
+
+Ensuite, nous avons chacun repris sa *SAE1.02* _(concernant le logiciel ludopédagogique)_, faute d’accès aux fichiers de nos TP à ce moment-là, et nous avons chacun créé son propre repositorie afin d’y *push/pull* nos fichiers ou de les *téléverser directement* via l’interface web.
+
+image::./img/dépots.png[align=center]
+
+Nous avons aussi invité d’autres personnes ayant participé à nos projets de SAE pour compléter nos dépôts.
+
+Nous avons également configuré les permissions :
+
+* *Administration* : réservée au propriétaire du dépôt.
+* *Écriture* : attribuée aux membres ayant travaillé avec nous sur la SAE, leur permettant de modifier les dépôts.
+* *Lecture* : pour ceux qui devaient uniquement consulter les fichiers, sans possibilité de modification.
+
+image::./img/perms-repo.png[align=center]
+
+Enfin, nous avons réalisé des tests afin de vérifier s’il était possible de *push* dans des repositories où nous n’avions pas les droits nécessaires.
+
+image::./img/texte.png[align=center]
+image::./img/no-push.png[align=center]
+
+.Option pour téléverser inexistant
+image::./img/image.png[align=center]
+
+Pour finir, nous avons utilisé Gitea comme nous utilisons habituellement GitHub ou GitLab, en testant les différentes fonctionnalités et en nous assurant de bien comprendre son fonctionnement.
+====

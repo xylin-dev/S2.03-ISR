@@ -1,3 +1,5 @@
+:encoding: UTF-8
+
 // Partie 2.2 de la semaine 1
 ==== *Partie 2.2: Préparation de la Machine Virtuelle*
 * *Que signifie “64-bit” dans “Debian 64-bit” ?* +
